@@ -227,24 +227,24 @@ function App() {
                 <div className="card-1">
                   <div className="row">
                     <div className="col-8 padding-left-10">
-                      <div className="card-name">Latency Average</div>
+                      <div className="card-name">Latency Score Avg</div>
                       <div className="card-number">
-                        {overallAverage.LATENCY}
+                        {overallAverage.LATENCY_SCORE}
                       </div>
                       <div className="green-value">
                         Rank{" "}
                         <span className="card-date">
                           {" "}
-                          {Math.ceil(overallAverage.LATENCY_Rank)} /{" "}
-                          {overallAverage.LATENCY_MAX}
+                          {Math.ceil(overallAverage.LATENCY_SCORE_Rank)} /{" "}
+                          {overallAverage.LATENCY_SCORE_MAX}
                         </span>
                       </div>
                       <div className="brown-value">
                         Todays Stats :{" "}
                         <span className="card-date">
                           {" "}
-                          {todaysAverage.LATENCY} -{" "}
-                          {Math.ceil(todaysAverage.LATENCY_Rank)}
+                          {todaysAverage.LATENCY_SCORE} -{" "}
+                          {Math.ceil(todaysAverage.LATENCY_SCORE_Rank)}
                         </span>
                       </div>
                     </div>
@@ -300,7 +300,7 @@ function App() {
               <div className="row">
                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                   <h3 className="chart-heading-overview">overview</h3>
-                  <h3 className="chart-heading">Latency graph</h3>
+                  <h3 className="chart-heading">Latency Score graph</h3>
                 </div>
                 <div className="col-lg-6 col-md-12 col-sm-12 col-xs-12 right">
                   <h3 className="chart-heading-right">
@@ -610,7 +610,7 @@ function App() {
                       <thead className="table-header ">
                         <tr>
                           <th scope="col">Clusture Name</th>
-                          <th scope="col">Latency</th>
+                          <th scope="col">LatencyScore</th>
                           <th scope="col">Rank</th>
                           <th scope="col">Tickets</th>
                           <th scope="col">Rank</th>
@@ -626,8 +626,8 @@ function App() {
                           return (
                             <tr>
                               <th scope="row">{item.clusterName}</th>
-                              <td>{item.Latency}</td>
-                              <td>{item.rankLatency}</td>
+                              <td>{item.latencyScore}</td>
+                              <td>{item.latencyScoreRank}</td>
                               <td>{item.tickets}</td>
                               <td>{item.rankTickets}</td>
                               <td>{item.POND}</td>
