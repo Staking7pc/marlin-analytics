@@ -25,7 +25,7 @@ function App() {
         .get("https://brightlystake.com/api/marlin/5minStats/" + url.clusterId)
         .then((res) => {
           //console.log('5minsStats')
-          //console.log(res.data.data);
+          console.log(res.data.data);
           setitems(res.data.data);
 
           let latestObj =
@@ -94,22 +94,24 @@ function App() {
 
   if (showDay) {
     dayData.map((f) =>
-      f.Latency <= items.length
-        ? (showLatency.push(f.Latency),
+      f.latencyScore <= items.length
+        ? (showLatency.push(f.latencyScore),
           formatedDates.push(moment(f.time).format("MMM D YYYY HH:mm:ss")))
         : null
     );
+    console.log('A1'+showLatency)
   } else {
     hourData.map((f) =>
-      f.Latency <= items.length
-        ? (showLatency.push(f.Latency),
+      f.latencyScore <= items.length
+        ? (showLatency.push(f.latencyScore),
           formatedDates.push(f.time.substr(11, 8)))
         : null
     );
+    console.log('A2'+showLatency)
   }
   items.map((f) =>
-    f.Latency <= items.length
-      ? (totalData.push(f.Latency),
+    f.latencyScore <= items.length
+      ? (totalData.push(f.latencyScore),
         ticketsData.push(f.tickets),
         viewMoreFormattedDates.push(
           moment(f.time).format("MMM D YYYY HH:mm:ss")
@@ -440,7 +442,7 @@ function App() {
                     <thead className="table-header ">
                       <tr>
                         <th scope="col">Date/Time</th>
-                        <th scope="col">Latency</th>
+                        <th scope="col">Latency Score</th>
                         <th scope="col">Tickets</th>
                       </tr>
                     </thead>
@@ -449,7 +451,7 @@ function App() {
                         return (
                           <tr>
                             <th scope="row">{item.time}</th>
-                            <th>{item.Latency}</th>
+                            <th>{parseFloat(item.latencyScore).toFixed(2)}</th>
                             <th>{item.tickets}</th>
                           </tr>
                         );
@@ -601,7 +603,7 @@ function App() {
               >
                 <Modal.Header closeButton>
                   <Modal.Title id="contained-modal-title-vcenter">
-                    5 MINS DATA
+                    5 MINS DATA for {url.clusterId}
                   </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -609,7 +611,8 @@ function App() {
                     <table className="table table-bordered">
                       <thead className="table-header ">
                         <tr>
-                          <th scope="col">Clusture Name</th>
+                          <th scope="col">Latency</th>
+                          <th scope="col">Rank</th>
                           <th scope="col">LatencyScore</th>
                           <th scope="col">Rank</th>
                           <th scope="col">Tickets</th>
@@ -625,8 +628,9 @@ function App() {
                         {items.map((item, keys) => {
                           return (
                             <tr>
-                              <th scope="row">{item.clusterName}</th>
-                              <td>{item.latencyScore}</td>
+                              <th scope="row">{item.Latency}</th>
+                              <th scope="row">{item.rankLatency}</th>
+                              <td>{parseFloat(item.latencyScore).toFixed(2)}</td>
                               <td>{item.latencyScoreRank}</td>
                               <td>{item.tickets}</td>
                               <td>{item.rankTickets}</td>
